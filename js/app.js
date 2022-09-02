@@ -31,7 +31,7 @@ displayNews = async () => {
   const data = await fetchNewsApi();
   const cardSection = document.getElementById("card-section");
   data.data.forEach((news) => {
-    const { title, author, details, thumbnail_url } = news;
+    const { title, author, details, thumbnail_url, total_view } = news;
     const { name, published_date, img } = author;
     console.log(img);
     const div = document.createElement("div");
@@ -55,7 +55,7 @@ displayNews = async () => {
                 <p class="card-text">
                   <small class="text-muted">Last updated 3 mins ago</small>
                 </p>
-                <div class="d-flex mt-2">
+                <div class="d-flex justify-content-between align-items-center mt-2">
                   <div class="d-flex align-items-center" >
                     <img src="${img}" id="auth-img" class="img-fluid rounded-circle"  alt="..." />     
                     <div class="ms-1">
@@ -63,10 +63,14 @@ displayNews = async () => {
                       <p><small>${published_date}</small></p>   
                     </div>
                   </div>
-
                   <div>
+                    <h6><i class="fa-solid fa-eye"></i> ${total_view}</h6>
                   </div>
                   <div>
+                     <p><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></p>
+                  </div>
+                  <div>
+                  <h4><i class="fa-solid fa-arrow-right-from-bracket"></i></h4>
                   </div>
                 </div>
 
