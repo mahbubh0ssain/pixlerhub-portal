@@ -33,7 +33,6 @@ displayNews = async () => {
   data.data.forEach((news) => {
     const { title, author, details, thumbnail_url, total_view } = news;
     const { name, published_date, img } = author;
-    console.log(img);
     const div = document.createElement("div");
     div.classList.add("card", "mb-3");
     div.innerHTML = `
@@ -41,8 +40,8 @@ displayNews = async () => {
             <div class="col-md-3">
               <img src="${thumbnail_url}" class="img-fluid p-3 w-full" alt="..." />
             </div>
-            <div class="col-md-9    d-flex flex-column  align-content-around">
-              <div class="card-body  d-flex flex-column  align-content-around">
+            <div class="col-md-9">
+              <div class="card-body">
                 <h4 class="card-title">${title}</h4>
                 <p class="card-text">
                   ${
@@ -70,7 +69,11 @@ displayNews = async () => {
                      <p><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></p>
                   </div>
                   <div>
-                  <h4><i class="fa-solid fa-arrow-right-from-bracket"></i></h4>
+                    <h4>
+                       <i class="fa-solid fa-arrow-right-from-bracket" onclick="modalBtn()" type="button"
+                       class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#exampleModal">
+                       </i>
+                    </h4>
                   </div>
                 </div>
               </div>
@@ -78,8 +81,20 @@ displayNews = async () => {
           </div>
     `;
     cardSection.appendChild(div);
-
-    console.log(news);
   });
 };
 displayNews();
+
+modalBtn = async () => {
+  const data = await fetchNewsApi();
+  data.data.forEach((news) => {
+    const { image_url, details } = news;
+
+    const modalBody = document.getElementById("modal-body");
+    modalBody.innerHTML = `
+      <img src="${image_url}" alt="">
+              <h6></h6>
+    
+    `;
+  });
+};
