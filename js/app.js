@@ -41,8 +41,8 @@ displayNews = async () => {
             <div class="col-md-3">
               <img src="${thumbnail_url}" class="img-fluid p-3 w-full" alt="..." />
             </div>
-            <div class="col-md-9 flex-row">
-              <div class="card-body">
+            <div class="col-md-9    d-flex flex-column  align-content-around">
+              <div class="card-body  d-flex flex-column  align-content-around">
                 <h4 class="card-title">${title}</h4>
                 <p class="card-text">
                   ${
@@ -51,20 +51,20 @@ displayNews = async () => {
                       : details
                   }
                 </p>
-
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
                 <div class="d-flex justify-content-between align-items-center mt-2">
                   <div class="d-flex align-items-center" >
                     <img src="${img}" id="auth-img" class="img-fluid rounded-circle"  alt="..." />     
-                    <div class="ms-1">
-                      <p<small>${name}</small></p>   
+                    <div class="ms-1 ">
+                      <p<small>${
+                        name ? name : "No data available"
+                      }</small></p>   
                       <p><small>${published_date}</small></p>   
                     </div>
                   </div>
                   <div>
-                    <h6><i class="fa-solid fa-eye"></i> ${total_view}</h6>
+                    <h6><i class="fa-solid fa-eye"></i> ${
+                      total_view ? total_view : "No data available"
+                    }</h6>
                   </div>
                   <div>
                      <p><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></p>
@@ -73,8 +73,6 @@ displayNews = async () => {
                   <h4><i class="fa-solid fa-arrow-right-from-bracket"></i></h4>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
