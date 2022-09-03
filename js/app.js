@@ -20,7 +20,7 @@ displayNewsCategory = async () => {
 displayNewsCategory();
 
 fetchNewsApi = async () => {
-  const url = `https://openapi.programming-hero.com/api/news/category/01`;
+  const url = `https://openapi.programming-hero.com/api/news/category/08`;
   const res = await fetch(url);
   const data = await res.json();
   return data;
@@ -29,9 +29,14 @@ fetchNewsApi = async () => {
 
 displayNews = async () => {
   const data = await fetchNewsApi();
+  const itemsElement = document.getElementById("items-found");
+
+  itemsElement.innerText = `${data.data.length} items found.`;
+
   const cardSection = document.getElementById("card-section");
   data.data.forEach((news) => {
-    const { title, author, details, thumbnail_url, total_view } = news;
+    const { title, author, details, image_url, thumbnail_url, total_view } =
+      news;
     const { name, published_date, img } = author;
     const div = document.createElement("div");
     div.classList.add("card", "mb-3");
@@ -70,7 +75,8 @@ displayNews = async () => {
                   </div>
                   <div>
                     <h4>
-                       <i class="fa-solid fa-arrow-right-from-bracket" onclick="modalBtn()" type="button"
+                       <i class="fa-solid fa-arrow-right-from-bracket"
+                        onclick="modalButton('${image_url}')" type="button"
                        class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#exampleModal">
                        </i>
                     </h4>
@@ -85,16 +91,10 @@ displayNews = async () => {
 };
 displayNews();
 
-modalBtn = async () => {
-  const data = await fetchNewsApi();
-  data.data.forEach((news) => {
-    const { image_url, details } = news;
-
-    const modalBody = document.getElementById("modal-body");
-    modalBody.innerHTML = `
-      <img src="${image_url}" alt="">
-              <h6></h6>
-    
+// show news in modal
+modalButton = (image_url) => {
+  const modalBody = document.getElementById("modal-body");
+  modalBody.innerHTML = `
+      <img src="${image_url}" class="img-fluid" alt="">
     `;
-  });
 };

@@ -59,10 +59,12 @@
       <section>
         <ul id="news-category"></ul>
       </section>
+
+      <!-- items found section -->
+      <h5 id="items-found" class="p-2 my-2 bg-light rounded"></h5>
       <!-- news card  -->
       <section id="card-section"></section>
       <!-- modal section start here -->
-      <!-- Button trigger modal -->
 
       <!-- Modal -->
       <div
@@ -75,8 +77,15 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-            <div class="modal-body" id="modal-body">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
+            <div class="modal-body" id="modal-body"></div>
             <div class="modal-footer">
               <button
                 type="button"
@@ -93,7 +102,7 @@
         </div>
       </div>
     </main>
-    <footer class="bg-info py-2">
+    <footer class="bg-info py-2 fixed-bottom">
       <h6 class="text-white text-center">
         &copy; All Rights Reserved by PixlerHub Portal
       </h6>
