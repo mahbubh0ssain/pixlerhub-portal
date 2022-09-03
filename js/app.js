@@ -9,26 +9,27 @@ displayNewsCategory = async () => {
   const news = await fetchCategoryApi();
   const newsCateGory = document.getElementById("news-category");
   news.data.news_category.forEach((category) => {
-    const { category_name } = category;
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <a href=""><li>${category_name}</li></a>
+    const { category_name, category_id } = category;
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <button type="button" class="btn" onclick="fetchNewsApi('${category_id}')">${category_name}</button>
     `;
-    newsCateGory.appendChild(li);
+    newsCateGory.appendChild(div);
   });
 };
 displayNewsCategory();
 
-fetchNewsApi = async () => {
-  const url = `https://openapi.programming-hero.com/api/news/category/08`;
+fetchNewsApi = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
+  console.log(url);
   const res = await fetch(url);
   const data = await res.json();
   return data;
 };
-// fetchNewsApi();
-
+fetchNewsApi("08");
 displayNews = async () => {
   const data = await fetchNewsApi();
+  console.log(data);
   const itemsElement = document.getElementById("items-found");
 
   itemsElement.innerText = `${data.data.length} items found.`;
