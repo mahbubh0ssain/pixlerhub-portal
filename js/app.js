@@ -29,10 +29,11 @@ fetchNewsApi = async (id) => {
 fetchNewsApi("08");
 
 displayNews = (data) => {
-  console.log(data.data);
   // if (data.data.length === 0) {
   //   document.getElementById("no-item").classList.remove("none");
   // }
+
+  data.data.sort((a, b) => b.total_view - a.total_view);
   const itemsElement = document.getElementById("items-found");
 
   itemsElement.innerText = `${data.data.length} items found.`;
@@ -47,10 +48,10 @@ displayNews = (data) => {
     div.classList.add("card", "mb-3");
     div.innerHTML = `
            <div class="row g-0">
-            <div class="col-md-3 col-sm-12">
-              <img src="${thumbnail_url}" class="img-fluid p-3 w-auto" alt="..." />
+            <div class="col-md-12 col-lg-3 col-sm-12">
+              <img src="${image_url}" class="img-fluid p-3 w-100 h-100" alt="..." />
             </div>
-            <div class="col-md-9 col-sm-12">
+            <div class="col-md-12 col-lg-9 col-sm-12">
               <div class="card-body">
                 <h4 class="card-title">${title}</h4>
                 <p class="card-text">
@@ -65,9 +66,13 @@ displayNews = (data) => {
                     <img src="${img}" id="auth-img" class="img-fluid rounded-circle"  alt="..." />     
                     <div class="ms-1 ">
                       <p<small>${
-                        name ? name : "No data available"
+                        name === null ? "No data available" : name
                       }</small></p>   
-                      <p><small>${published_date}</small></p>   
+                      <p><small>${
+                        published_date === null
+                          ? "No data available"
+                          : published_date
+                      }</small></p>   
                     </div>
                   </div>
                   <div>
