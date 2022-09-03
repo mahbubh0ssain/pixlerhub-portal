@@ -76,7 +76,7 @@ displayNews = (data) => {
                     </div>
                   </div>
                   <div>
-                    <h6><i class="fa-solid fa-eye"></i> ${
+                    <h6 class="m-0"><i class="fa-solid fa-eye"></i> ${
                       total_view ? total_view : "No data available"
                     }</h6>
                   </div>

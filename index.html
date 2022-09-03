@@ -63,9 +63,23 @@
       <!-- items found section -->
       <h5 id="items-found" class="p-2 my-2 bg-light rounded"></h5>
       <!-- sort by section starts here  -->
-      <div class="my-2 d-flex">
-        <h5>Sort By View:</h6>
-
+      <div class="my-3 d-flex align-items-center">
+        <h6 class="m-0">Sort By View:</h6>
+        <p class="p-2 ms-2 rounded bg-light">
+          Default <i class="fa-solid fa-angle-down ms-2"></i>
+        </p>
+        <button type="button" class="btn btn-primary ms-auto me-2">
+          Todays Pick
+        </button>
+        <button type="button" class="btn btn-outline-primary">Trending</button>
+      </div>
+      <!-- spinner starts here  -->
+      <div
+        class="spinner-border text-center"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      >
+        <span class="visually-hidden text-center">Loading...</span>
       </div>
       <!-- news card  -->
       <section id="card-section"></section>
