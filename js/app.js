@@ -35,8 +35,10 @@ fetchNewsApi("08");
 // displayNews;
 displayNews = (data) => {
   document.getElementById("spinner").classList.add("d-none");
+  //sort by views
   data.data.sort((a, b) => b.total_view - a.total_view);
   const itemsElement = document.getElementById("items-found");
+  itemsElement.classList.add("p-2", "my-2", "bg-light", "rounded");
   itemsElement.innerText = `${data.data.length} items found.`;
   const cardSection = document.getElementById("card-section");
   cardSection.textContent = "";
@@ -52,7 +54,7 @@ displayNews = (data) => {
             </div>
             <div class="col-md-12 col-lg-9 col-sm-12">
               <div class="card-body">
-                <h4 class="card-title">${title}</h4>
+                <h5 class="card-title">${title}</h5>
                 <p class="card-text">
                   ${
                     details.length > 500
@@ -64,10 +66,11 @@ displayNews = (data) => {
                   <div class="d-flex align-items-center" >
                     <img src="${img}" id="auth-img" class="img-fluid rounded-circle"  alt="..." />     
                     <div class="ms-1 ">
-                      <p<small>${
+                      <p class="m-0"><small>${
                         name === null ? "No data available" : name
-                      }</small></p>   
-                      <p><small>${
+                      }</small>
+                      </p>   
+                      <p class="m-0"><small>${
                         published_date === null
                           ? "No data available"
                           : published_date
@@ -80,7 +83,7 @@ displayNews = (data) => {
                     }</h6>
                   </div>
                   <div>
-                     <p><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></p>
+                     <p class="m-0"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></p>
                   </div>
                   <div>
                     <h4>
@@ -109,6 +112,40 @@ fetchForModal = async (_id) => {
 };
 
 displayDataForModal = (newsInfo) => {
-  console.log(newsInfo);
+  const { total_view, title, author, image_url, details } = newsInfo.data[0];
+  const { name, published_date, img } = author;
+  document.getElementById("exampleModalLabel").innerText = title;
+  document.getElementById("modal-body").innerHTML = `
+      <img src="${image_url}" class="img-fluid w-100 h-100" alt="..." />
+      <div class="d-flex justify-content-between align-items-center mt-2">
+                  <div class="d-flex align-items-center" >
+                    <img src="${img}" id="auth-img" class="img-fluid rounded-circle"  alt="..." />     
+                    <div class="ms-1 ">
+                      <p class="m-0"><small>${
+                        name === null ? "No data available" : name
+                      }</small></p>   
+                      <p class="m-0"><small>${
+                        published_date === null
+                          ? "No data available"
+                          : published_date
+                      }</small></p>   
+                    </div>
+                   </div>
+                   <div>
+                    <h6 class="m-0"><i class="fa-solid fa-eye"></i> ${
+                      total_view ? total_view : "No data available"
+                    }</h6>
+                   </div>
+                  </div>
+
+
+
+      <p class="card-text mt-2">
+        ${details}
+      </p>
+  
+  
+  
+  `;
+  console.log(newsInfo.data[0]);
 };
-// displayDataForModal();
