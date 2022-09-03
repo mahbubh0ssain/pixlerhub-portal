@@ -1,3 +1,4 @@
+// fetchCategoryApi;
 fetchCategoryApi = async () => {
   const url = `https://openapi.programming-hero.com/api/news/categories`;
   const res = await fetch(url);
@@ -5,6 +6,7 @@ fetchCategoryApi = async () => {
   return data;
 };
 
+// display news category
 displayNewsCategory = async () => {
   const news = await fetchCategoryApi();
   const newsCateGory = document.getElementById("news-category");
@@ -19,7 +21,9 @@ displayNewsCategory = async () => {
 };
 displayNewsCategory();
 
+// fetch news API
 fetchNewsApi = async (id) => {
+  document.getElementById("spinner").classList.remove("d-none");
   const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
   const res = await fetch(url);
   const data = await res.json();
@@ -28,21 +32,16 @@ fetchNewsApi = async (id) => {
 };
 fetchNewsApi("08");
 
+// displayNews;
 displayNews = (data) => {
-  // if (data.data.length === 0) {
-  //   document.getElementById("no-item").classList.remove("none");
-  // }
-
+  document.getElementById("spinner").classList.add("d-none");
   data.data.sort((a, b) => b.total_view - a.total_view);
   const itemsElement = document.getElementById("items-found");
-
   itemsElement.innerText = `${data.data.length} items found.`;
-
   const cardSection = document.getElementById("card-section");
   cardSection.textContent = "";
   data.data.forEach((news) => {
-    const { title, author, details, image_url, thumbnail_url, total_view } =
-      news;
+    const { title, author, details, image_url, total_view, _id } = news;
     const { name, published_date, img } = author;
     const div = document.createElement("div");
     div.classList.add("card", "mb-3");
@@ -86,7 +85,7 @@ displayNews = (data) => {
                   <div>
                     <h4>
                        <i class="fa-solid fa-arrow-right-from-bracket"
-                        onclick="modalButton('${image_url}')" type="button"
+                        onclick="fetchForModal('${_id}')" type="button"
                        class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#exampleModal">
                        </i>
                     </h4>
@@ -101,9 +100,15 @@ displayNews = (data) => {
 };
 
 // show news in modal
-modalButton = (image_url) => {
-  const modalBody = document.getElementById("modal-body");
-  modalBody.innerHTML = `
-      <img src="${image_url}" class="img-fluid" alt="">
-    `;
+fetchForModal = async (_id) => {
+  const url = `https://openapi.programming-hero.com/api/news/${_id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayDataForModal(data);
+  return data;
 };
+
+displayDataForModal = (newsInfo) => {
+  console.log(newsInfo);
+};
+// displayDataForModal();
