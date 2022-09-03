@@ -21,20 +21,24 @@ displayNewsCategory();
 
 fetchNewsApi = async (id) => {
   const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
-  console.log(url);
   const res = await fetch(url);
   const data = await res.json();
+  displayNews(data);
   return data;
 };
 fetchNewsApi("08");
-displayNews = async () => {
-  const data = await fetchNewsApi();
-  console.log(data);
+
+displayNews = (data) => {
+  console.log(data.data);
+  // if (data.data.length === 0) {
+  //   document.getElementById("no-item").classList.remove("none");
+  // }
   const itemsElement = document.getElementById("items-found");
 
   itemsElement.innerText = `${data.data.length} items found.`;
 
   const cardSection = document.getElementById("card-section");
+  cardSection.textContent = "";
   data.data.forEach((news) => {
     const { title, author, details, image_url, thumbnail_url, total_view } =
       news;
@@ -43,10 +47,10 @@ displayNews = async () => {
     div.classList.add("card", "mb-3");
     div.innerHTML = `
            <div class="row g-0">
-            <div class="col-md-3">
-              <img src="${thumbnail_url}" class="img-fluid p-3 w-full" alt="..." />
+            <div class="col-md-3 col-sm-12">
+              <img src="${thumbnail_url}" class="img-fluid p-3 w-auto" alt="..." />
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 col-sm-12">
               <div class="card-body">
                 <h4 class="card-title">${title}</h4>
                 <p class="card-text">
@@ -90,7 +94,6 @@ displayNews = async () => {
     cardSection.appendChild(div);
   });
 };
-displayNews();
 
 // show news in modal
 modalButton = (image_url) => {

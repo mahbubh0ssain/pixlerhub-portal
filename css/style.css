@@ -3,15 +3,7 @@
   padding: 0px;
   box-sizing: border-box;
 }
-#news-category {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  list-style-type: none;
-}
-#news-category > li {
-  margin-right: 20px;
-}
+
 #auth-img {
   height: 40px;
   width: 40px;
